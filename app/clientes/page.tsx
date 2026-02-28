@@ -1,15 +1,24 @@
 // app/clientes/page.tsx
-import { supabaseServer } from '../../src/lib/supabase/server'
+import { createClient } from '../../src/lib/supabase/server'
 import ClientesTabla from './ClientesTabla'
 
 export default async function PageClientes() {
-  // Server Component: trae los clientes directamente desde Supabase
-  const { data: clientes, error } = await supabaseServer
+    
+  const supabase = await createClient()
+
+  
+  const { data: clientes, error } = await supabase
     .from('clients')
     .select('id, full_name, phone, created_at, pets(id)')
+    .order('created_at', { ascending: false })
 
-  if (error) return <p className="text-red-500">Error: {error.message}</p>
+  if (error) {
+    return (
+      <div className="p-8 bg-gray-900 min-h-screen text-red-500">
+        <p>Error: {error.message}</p>
+      </div>
+    )
+  }
 
-  // Pasamos los datos al Client Component como prop
-  return <ClientesTabla clientes={clientes || []} />
+  return <ClientesTabla clientes={clientes ?? []} />
 }
