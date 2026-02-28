@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐾 Ruffo App - Gestión Veterinaria
 
-## Getting Started
+Sistema moderno para la administración de clientes y mascotas, optimizado para veterinarias y peluquerías caninas. Construido con el stack más actual de Next.js y Supabase.
 
-First, run the development server:
+**Demo en vivo:** [https://ruffo-app-gilt.vercel.app/clientes](https://ruffo-app-gilt.vercel.app/clientes)
 
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+* **Framework:** Next.js 15 (App Router)
+* **Base de Datos & Auth:** Supabase
+* **Estilos:** Tailwind CSS
+* **Componentes:** Shadcn UI
+* **Iconos:** Lucide React
+
+---
+
+##  Instalación y Configuración
+
+Sigue estos pasos para ejecutar el proyecto localmente:
+
+### 1. Clonar el repositorio
 ```bash
+git clone [https://github.com/ale123-hub/Ruffo-app](https://github.com/ale123-hub/Ruffo-app)
+cd Ruffo-app
+
+npm install
+
+NEXT_PUBLIC_SUPABASE_URL=[https://orqsjvdfyjuipsjevrln.supabase.co](https://orqsjvdfyjuipsjevrln.supabase.co)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_mXLLk-hHXTNp7C_PUFbJiw_MHO61N6-
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Accede a: http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+SQL
+-- Tabla de Clientes
+create table public.clients (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  phone text not null,
+  email text,
+  notes text,
+  created_at timestamp with time zone default now()
+);
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-- Tabla de Mascotas
+create table public.pets (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid references public.clients(id) on delete cascade,
+  name text not null,
+  species text not null check (species in ('canino','felino','otro')),
+  breed text,
+  behavior_notes text,
+  created_at timestamp with time zone default now()
+);
 
-## Learn More
+SEGURIDAD RLS
+alter table public.clients enable row level security;
+alter table public.pets enable row level security;
 
-To learn more about Next.js, take a look at the following resources:
+-- Política para Clientes: Solo usuarios autenticados
+create policy "Allow all for authenticated users"
+on public.clients
+for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-- Política para Mascotas: Solo usuarios autenticados
+create policy "Allow all for authenticated users"
+on public.pets
+for all
+using (auth.role() = 'authenticated')
+with check (auth.role() = 'authenticated');
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npx shadcn@latest add card button table input
