@@ -75,3 +75,8 @@ using (auth.role() = 'authenticated')
 with check (auth.role() = 'authenticated');
 
 npx shadcn@latest add card button table input
+
+
+
+Desarrollado por ale123-hub
+
