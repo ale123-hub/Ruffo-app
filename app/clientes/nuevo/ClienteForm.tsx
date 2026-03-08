@@ -49,10 +49,10 @@ export default function ClienteForm() {
         <div className="p-8 bg-gray-900 min-h-screen text-white flex justify-center">
             <Card className="w-full max-w-lg p-6 bg-gray-800">
                 <div className="flex justify-between items-center mb-4">
-                    <h1 className="text-2xl font-bold">Nuevo Cliente</h1>
+                    <h1 className="text-2xl font-bold text-white">Nuevo Cliente</h1>
                     <Button
                         variant="outline"
-                        className="text-white border-white hover:bg-gray-700"
+                        className="text-white border-white hover:bg-green-700"
                         onClick={handleBack}
                     >
                         ← Atrás
