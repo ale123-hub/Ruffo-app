@@ -63,8 +63,9 @@ export default function ClienteForm() {
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
-                        <label className="block mb-1">Nombre completo *</label>
+                        <label className="block mb-1 text-white">Nombre completo *</label>
                         <Input
+                            className="text-white"
                             value={fullName}
                             onChange={e => setFullName(e.target.value)}
                             placeholder="Ej: Juan Pérez"
@@ -73,8 +74,9 @@ export default function ClienteForm() {
                     </div>
 
                     <div>
-                        <label className="block mb-1">Teléfono *</label>
+                        <label className="block mb-1 text-white">Teléfono *</label>
                         <Input
+                            className="text-white"
                             value={phone}
                             onChange={e => setPhone(e.target.value)}
                             placeholder="Ej: 600123456"
@@ -83,8 +85,9 @@ export default function ClienteForm() {
                     </div>
 
                     <div>
-                        <label className="block mb-1">Email</label>
+                        <label className="block mb-1 text-white">Email</label>
                         <Input
+                            className="text-white"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             placeholder="Ej: juan@mail.com"
@@ -93,7 +96,7 @@ export default function ClienteForm() {
                     </div>
 
                     <div>
-                        <label className="block mb-1">Notas</label>
+                        <label className="block mb-1 text-white">Notas</label>
                         <Textarea
                             value={notes}
                             onChange={e => setNotes(e.target.value)}

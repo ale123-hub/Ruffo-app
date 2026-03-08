@@ -70,16 +70,16 @@ export default function MascotaForm() {
 
       {/* Formulario */}
       <Card className="w-full max-w-lg p-6 bg-gray-800">
-        <h1 className="text-2xl font-bold mb-4">Nueva Mascota</h1>
+        <h1 className="text-2xl font-bold mb-4 text-white">Nueva Mascota</h1>
         {errorMsg && <p className="text-red-500 mb-4">{errorMsg}</p>}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="block mb-1">Nombre *</label>
-            <Input value={name} onChange={e => setName(e.target.value)} required />
+            <label className="block mb-1 text-white">Nombre *</label>
+            <Input value={name} onChange={e => setName(e.target.value)} className="text-white"required />
           </div>
 
           <div>
-            <label className="block mb-1">Especie *</label>
+            <label className="block mb-1 text-white">Especie *</label>
             <select
               value={species}
               onChange={e => setSpecies(e.target.value)}
@@ -93,12 +93,12 @@ export default function MascotaForm() {
           </div>
 
           <div>
-            <label className="block mb-1">Raza</label>
-            <Input value={breed} onChange={e => setBreed(e.target.value)} />
+            <label className="block mb-1 text-white">Raza</label>
+            <Input value={breed} onChange={e => setBreed(e.target.value)} className=" text-white" required />
           </div>
 
           <div>
-            <label className="block mb-1">Notas de comportamiento</label>
+            <label className="block mb-1 text-white">Notas de comportamiento</label>
             <Textarea value={notes} onChange={e => setNotes(e.target.value)} />
           </div>
 

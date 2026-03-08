@@ -56,7 +56,7 @@ export default function ClientesTabla({ clientes: initialClientes }: ClientesTab
     const filteredClientes = clientes.filter(c => {
         const busqueda = search.toLowerCase()
         return (
-            c.full_name?.toLowerCase().includes(busqueda) || 
+            c.full_name?.toLowerCase().includes(busqueda) ||
             c.phone?.includes(busqueda)
         )
     })
@@ -69,10 +69,10 @@ export default function ClientesTabla({ clientes: initialClientes }: ClientesTab
 
     const handleDelete = async (id: string) => {
         if (!confirm('¿Seguro que deseas eliminar este cliente?')) return
-        
+
         setLoading(true)
         const { error } = await supabase.from('clients').delete().eq('id', id)
-        
+
         if (error) {
             alert('Error: ' + error.message)
             setLoading(false)
@@ -120,20 +120,20 @@ export default function ClientesTabla({ clientes: initialClientes }: ClientesTab
                         {filteredClientes.length > 0 ? (
                             filteredClientes.map(cliente => (
                                 <TableRow key={cliente.id} className="border-gray-700 hover:bg-gray-750">
-                                    <TableCell className="font-medium text-blue-400">
+                                    <TableCell className="font-medium text-white">
                                         <Link href={`/clientes/${cliente.id}`}>{cliente.full_name}</Link>
                                     </TableCell>
-                                    <TableCell>{cliente.phone}</TableCell>
+                                    <TableCell className="text-white">{cliente.phone}</TableCell>
                                     <TableCell>
-                                        <span className="bg-gray-700 px-2 py-1 rounded text-xs">
+                                        <span className="bg-gray-700 px-2 py-1 rounded text-xs text-white">
                                             {cliente.pets?.length ?? 0}
                                         </span>
                                     </TableCell>
-                                    <TableCell className="text-gray-400 text-sm">
+                                    <TableCell className="text-white text-sm">
                                         {new Date(cliente.created_at).toLocaleDateString()}
                                     </TableCell>
                                     <TableCell className="text-right space-x-2">
-                                        <Button size="sm" variant="outline" className="border-gray-600" onClick={() => router.push(`/clientes/${cliente.id}`)}>Ver</Button>
+                                        <Button size="sm" variant="outline" className="border-green-600 text-white" onClick={() => router.push(`/clientes/${cliente.id}`)}>Ver</Button>
                                         <Button size="sm" variant="destructive" disabled={loading} onClick={() => handleDelete(cliente.id)}>Borrar</Button>
                                     </TableCell>
                                 </TableRow>

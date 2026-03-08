@@ -10,7 +10,7 @@ export const Textarea: React.FC<TextareaProps> = (props) => {
       {...props}
       className="
         w-full p-2 rounded
-        bg-white text-white border border-gray-300
+        bg-white text-black border border-gray-300
         focus:outline-none focus:ring-2 focus:ring-green-500
         placeholder-gray-500
       "

@@ -29,7 +29,7 @@ interface Props {
 
 export default function ClienteDetalle({ cliente }: Props) {
   return (
-    <div className="p-8 bg-gray-900 min-h-screen text-white">
+    <div className="p-8 bg-gray-800 min-h-screen text-white">
 
       {/* Fila con botones: Regresar y Agregar Mascota */}
       <div className="flex justify-between items-center mb-6">
@@ -47,8 +47,8 @@ export default function ClienteDetalle({ cliente }: Props) {
       </div>
 
       {/* Detalle del cliente */}
-      <Card className="bg-gray-800 p-4 mb-6">
-        <h1 className="text-2xl font-bold mb-2">{cliente.full_name}</h1>
+      <Card className="bg-gray-800 p-4 mb-6 text-white">
+        <h1 className="text-2xl font-bold mb-2 text-white">{cliente.full_name}</h1>
         <p><strong>Teléfono:</strong> {cliente.phone}</p>
         {cliente.email && <p><strong>Email:</strong> {cliente.email}</p>}
         {cliente.notes && <p><strong>Notas:</strong> {cliente.notes}</p>}
@@ -56,31 +56,31 @@ export default function ClienteDetalle({ cliente }: Props) {
       </Card>
 
       {/* Mascotas */}
-      <h2 className="text-xl font-bold mb-2">Mascotas ({cliente.pets?.length ?? 0})</h2>
+      <h2 className="text-xl font-bold mb-2 text-white"> Mascotas ({cliente.pets?.length ?? 0})</h2>
       <Card className="bg-gray-800">
         {cliente.pets?.length ? (
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nombre</TableHead>
-                <TableHead>Especie</TableHead>
-                <TableHead>Raza</TableHead>
-                <TableHead>Notas</TableHead>
+                <TableHead  >Nombre</TableHead>
+                <TableHead  >Especie</TableHead>
+                <TableHead  >Raza</TableHead>
+                <TableHead  >Notas</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {cliente.pets.map(mascota => (
                 <TableRow key={mascota.id}>
-                  <TableCell>{mascota.name}</TableCell>
-                  <TableCell>{mascota.species}</TableCell>
-                  <TableCell>{mascota.breed || '-'}</TableCell>
-                  <TableCell>{mascota.notes || '-'}</TableCell>
+                  <TableCell >{mascota.name}</TableCell>
+                  <TableCell >{mascota.species}</TableCell>
+                  <TableCell >{mascota.breed || '-'}</TableCell>
+                  <TableCell >{mascota.notes || '-'}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         ) : (
-          <p className="p-4 text-gray-300">No hay mascotas registradas</p>
+          <p className="p-4 text-white italic">No hay mascotas registradas</p>
         )}
       </Card>
     </div>

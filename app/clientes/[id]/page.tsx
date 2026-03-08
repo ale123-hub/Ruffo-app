@@ -72,7 +72,7 @@ export default function ClienteDetalle() {
                 </Link>
             </div>
 
-            <Card className="mb-6 p-6 bg-gray-800">
+            <Card className="mb-6 p-6 bg-gray-800 text-white">
                 <h1 className="text-2xl font-bold mb-2">{cliente.full_name}</h1>
                 <p>Teléfono: {cliente.phone}</p>
                 {cliente.email && <p>Email: {cliente.email}</p>}
@@ -86,7 +86,7 @@ export default function ClienteDetalle() {
                 </div>
             </Card>
 
-            <Card className="p-6 bg-gray-800">
+            <Card className="p-6 bg-gray-800 text-white">
                 <h2 className="text-xl font-bold mb-4">Mascotas ({cliente.pets?.length ?? 0})</h2>
                 {cliente.pets && cliente.pets.length > 0 ? (
                     <Table>
