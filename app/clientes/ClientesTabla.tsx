@@ -87,7 +87,7 @@ export default function ClientesTabla({ clientes: initialClientes }: ClientesTab
     )
 
     return (
-        <div className="p-8 bg-gray-900 min-h-screen text-black">
+        <div className="p-8 bg-gray-900 min-h-screen text-white">
             <div className="flex flex-col md:flex-row justify-between mb-6 gap-4 items-center">
                 <h1 className="text-3xl font-bold">Clientes ({clientes.length})</h1>
                 <div className="flex gap-3">
