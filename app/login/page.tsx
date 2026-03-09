@@ -12,20 +12,28 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
-  const [loading, setLoading] = useState(false) // Estado para feedback visual
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); // Evita recarga de página
     setLoading(true)
     setErrorMsg('')
     
-    // Usamos el 'supabase' que viene del import de arriba
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    // DEBUG: Mira tu consola del navegador (F12) al dar click
+    console.log("Enviando a Supabase:", { email, password });
+
+    const { data, error } = await supabase.auth.signInWithPassword({ 
+      email: email.trim(), // Limpiamos espacios accidentales
+      password: password 
+    })
     
     if (error) {
+      console.error("Error de Supabase:", error.message);
       setErrorMsg(error.message)
       setLoading(false)
     } else {
+      console.log("Login exitoso, redirigiendo...");
       router.push('/clientes')
     }
   }
@@ -40,12 +48,14 @@ export default function LoginPage() {
         </p>
       )}
 
-      <div className="space-y-4">
+      {/* Cambiamos el div por un FORM */}
+      <form onSubmit={handleLogin} className="space-y-4">
         <Input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
           disabled={loading}
         />
         <Input
@@ -53,16 +63,17 @@ export default function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
           disabled={loading}
         />
         <Button 
+          type="submit" // Importante: tipo submit
           className="w-full" 
-          onClick={handleLogin} 
           disabled={loading}
         >
           {loading ? 'Cargando...' : 'Ingresar'}
         </Button>
-      </div>
+      </form>
     </Card>
   )
 }
